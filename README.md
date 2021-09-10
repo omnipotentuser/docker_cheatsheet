@@ -10,13 +10,19 @@ Things I picked up learning about Docker
 ```
 
 The app code goes in app.
+
 The config that's mounted into containers via volumes goes in config.
+
 Any data that's also mounted into containers via volumes goes into data.
+
 Place Dockerfile and Dockerfile.deploy into app as well.
+
 The reason for two Dockerfiles is because the deploy one is built differently cuz prod doesn't need a bunch of dev stuff.
+
 Place docker-compose.yml in the docker-app dir.
 
 sample docker-compose.yml
+```
 version: '3.7'
 
 services:
@@ -35,8 +41,9 @@ services:
     env_file: config/app.env
     tty: true
     stdin_open: true
-    
+```
 sample Dockerfile
+```
 FROM elixir:1.11-slim
 
 ENV MIX_HOME=/opt/mix
@@ -59,13 +66,20 @@ USER app
 WORKDIR /app
 
 CMD ["bash"]
+```
+To start it all up, go into the app's root (~/develop/docker-app) and run `docker-compose up -d` which starts up all containers within the docker-compose file.
 
-To start it all up, go into the app's root (~/develop/docker-app) and run docker-compose up -d which starts up all containers within the docker-compose file.
 to get ID of process, run `docker ps`
-docker exec -it <container pid> bash
-> iex -S mix phx.server
+
+`docker exec -it <container pid> bash`
+
+`> iex -S mix phx.server`
+
 web browser go to the port :4003 or whats set in docker-compose.yml
+
 to build the container,
 `docker-compose build app`
+
+For more reference,
 https://docs.docker.com/compose/install/
   
