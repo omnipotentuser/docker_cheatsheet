@@ -2,11 +2,13 @@
 Things I picked up learning about Docker
 
 # creating a project with docker-compose
+```
 ~/develop/docker-app
                    |- app
                    |- config
                    |- data
-                  
+```
+
 The app code goes in app.
 The config that's mounted into containers via volumes goes in config.
 Any data that's also mounted into containers via volumes goes into data.
